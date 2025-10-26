@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Complaint</title>
+
+  <!--leaflet-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gov-blue': {
+              DEFAULT: '#052e61',
+              dark: '#032145'
+            },
+            'gov-saffron': '#FF9933',
+          }
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Mobile menu animation */
+    #mobile-menu {
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      transform: translateY(-10px);
+    }
+    #mobile-menu:not(.is-open) {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #mobile-menu.is-open {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md sticky top-0 z-50 relative">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <a href="#" class="text-xl font-bold text-gray-800">Complaint Portal</a>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-center space-x-2">
+              <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">File a Complaint</a>
+              <a href="userPage.html" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Dashboard</a>
+              <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Help</a>
+              <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">About us</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hidden md:flex items-center">
+          <a href="userPage.html" class="bg-gov-blue text-white text-center shadow-md hover:bg-gov-blue-dark hover:shadow-lg px-5 py-2 rounded-md font-medium transform hover:-translate-y-0.5 transition-all duration-200">
+            My Profile
+          </a>
+        </div>
+        
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">File a Complaint</a>
+        <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">Dashboard</a>
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">Help</a>
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">About us</a>
+      </div>
+      <div class="pt-4 pb-3 border-t border-gray-200">
+        <div class="px-3">
+          <a href="#" class="block w-full text-center px-4 py-2 rounded-md text-base font-medium text-white bg-gov-blue hover:bg-gov-blue-dark">My Profile</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="flex min-h-screen bg-gray-100">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 flex-shrink-0 bg-gov-blue text-white hidden lg:flex flex-col">
+  <div class="h-20 flex items-center justify-center bg-gov-blue-dark">
+    <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+    </svg>
+  </div>
+  
+  <nav class="flex-1 px-4 py-6">
+    <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gov-blue-dark transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2-2v-2z"></path></svg>
+        Dashboard
+    </a>
+    <a href="#" class="mt-2 flex items-center gap-3 px-4 py-3 rounded-md bg-gov-blue-dark font-semibold">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      File Complaint
+    </a>
+    <a href="index.html" class="mt-2 flex items-center gap-3 px-4 py-3 rounded-md text-red-300 hover:bg-red-700 hover:text-white transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+      </svg>
+      Logout
+    </a>
+  </nav>
+</aside>
+
+    <!-- Main Dashboard -->
+    <main class="flex-1 p-6 lg:p-10">
+
+  <div class="mb-10">
+    <h1 class="text-3xl font-bold text-gov-blue">File a New Complaint</h1>
+    <p class="mt-1 text-gray-600">Please provide all the necessary details below.</p>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-lg p-8">
+    <form action="#" method="POST" class="space-y-8">
+
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 border-b pb-2">1. Complainant Details</h2>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-500">Full Name</label>
+            <input type="text" value="Sunil Kumar" readonly class="mt-1 w-full px-4 py-2 bg-gray-100 border-gray-300 rounded-md shadow-sm">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-500">Mobile Number</label>
+            <input type="text" value="98********" readonly class="mt-1 w-full px-4 py-2 bg-gray-100 border-gray-300 rounded-md shadow-sm">
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 border-b pb-2">2. Complaint Details</h2>
+        <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="category" class="block text-sm font-medium text-gray-700">Complaint Category</label>
+            <select id="category" name="category" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-gov-blue focus:border-gov-blue">
+              <option>Pothole</option>
+              <option>Broken Streetlight</option>
+              <option>Waste Management</option>
+              <option>Water Logging</option>
+              <option>Illegal Construction</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="date" class="block text-sm font-medium text-gray-700">Date of Observation</label>
+            <input type="date" id="date" name="date" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-gov-blue focus:border-gov-blue">
+          </div>
+        </div>
+        <div class="mt-6">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Complaint Location (Click to place a pin)</label>
+          <div id="complaint-map" class="w-full h-64 rounded-md border border-gray-300"></div>
+        </div>
+        <div class="mt-6">
+          <label for="description" class="block text-sm font-medium text-gray-700">Detailed Description</label>
+          <textarea id="description" name="description" rows="4" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-gov-blue focus:border-gov-blue" placeholder="Describe the issue in detail..."></textarea>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-gray-800 border-b pb-2">3. Upload Evidence</h2>
+        <div class="mt-4">
+          <label for="file-upload" class="block text-sm font-medium text-gray-700">Attach Photos or Documents</label>
+          <div class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+            <div class="space-y-1 text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <div class="flex text-sm text-gray-600"><label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-gov-blue hover:text-gov-blue-dark focus-within:outline-none"><span>Upload a file</span><input id="file-upload" name="file-upload" type="file" class="sr-only"></label><p class="pl-1">or drag and drop</p></div>
+              <p class="text-xs text-gray-500">PNG, JPG, PDF up to 5MB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="pt-5">
+        <div class="flex justify-end">
+          <a href="acknowledgement.html"
+   class="w-full md:w-auto py-3 px-8 bg-gov-blue text-white font-semibold rounded-lg shadow-md hover:bg-gov-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gov-blue transition-all duration-200">
+  Submit Complaint
+</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+  </div>
+
+  <!-- JS for Mobile Menu -->
+  <script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('is-open');
+    });
+  </script>
+
+  <!--script for map while registering complaint-->
+  <script>
+    // --- Initialize Complaint Form Map ---
+const complaintMap = L.map('complaint-map').setView([19.2183, 72.9781], 13); // Centered on Thane
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(complaintMap);
+
+let marker;
+
+// Function to run when the map is clicked
+complaintMap.on('click', function(e) {
+  // If a marker already exists, remove it
+  if (marker) {
+    complaintMap.removeLayer(marker);
+  }
+  // Add a new marker at the clicked location
+  marker = L.marker(e.latlng).addTo(complaintMap);
+  
+  // You would typically store e.latlng.lat and e.latlng.lng in hidden form fields here
+  // console.log("Latitude: " + e.latlng.lat + ", Longitude: " + e.latlng.lng);
+});
+  </script>
+</body>
+</html>

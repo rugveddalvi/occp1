@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--map-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complaint Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'gov-blue': {
+                'DEFAULT': '#052e61',
+                'dark': '#032145'
+              },
+              'gov-saffron': '#FF9933',
+            }
+          },
+        },
+      };
+    </script>
+
+    <style>
+      #mobile-menu {
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        transform: translateY(-10px);
+      }
+      #mobile-menu:not(.is-open) {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #mobile-menu.is-open {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50 relative">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <a href="#" class="text-xl font-bold text-gray-800">Complaint Portal</a>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-center space-x-2">
+            <a href="loginRegister.html" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">File a Complaint</a>
+            <a href="dashboard.html" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Dashboard</a>
+            <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Help</a>
+            <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">About us</a>
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center">
+        <a href="loginRegister.html" class="bg-gov-blue text-white text-center shadow-md hover:bg-gov-blue-dark hover:shadow-lg px-5 py-2 rounded-md font-medium transform hover:-translate-y-0.5 transition-all duration-200">
+          Login / Register
+        </a>
+      </div>
+      <div class="md:hidden flex items-center">
+        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-lg">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a href="loginRegister.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">File a Complaint</a>
+      <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">Dashboard</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">Help</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">About us</a>
+    </div>
+    <div class="pt-4 pb-3 border-t border-gray-200">
+      <div class="px-3">
+        <a href="loginRegister.html" class="block w-full text-center px-4 py-2 rounded-md text-base font-medium text-white bg-gov-blue hover:bg-gov-blue-dark">Login / Register</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container mx-auto mt-12 px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    
+    <div class="text-center md:text-left">
+
+      <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
+        <div class="flex-shrink-0 h-20 w-20 bg-gray-200 rounded-full flex items-center justify-center border-2 border-gray-300">
+          <svg class="w-12 h-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+          </svg>
+        </div>
+        <h1 class="text-3xl lg:text-4xl font-bold text-gov-blue leading-tight">
+          Civic Complaint Portal
+        </h1>
+      </div>
+
+      <p class="mt-4 text-base text-gray-700">
+        Platform for citizens to register, track, and receive updates on civic-related complaints.
+      </p>
+
+      <div class="mt-8 bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-blue-800">
+              Please log in or sign up to register a complaint.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 pt-6 border-t border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-700 text-center md:text-left">Live Statistics</h3>
+        <div class="mt-4 flex justify-center md:justify-start space-x-8 text-center">
+          <div>
+            <p class="text-3xl font-bold text-gov-blue">1,245</p>
+            <p class="text-sm text-gray-500">Complaints Filed</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-green-600">982</p>
+            <p class="text-sm text-gray-500">Issues Resolved</p>
+          </div>
+          <div>
+            <p class="text-3xl font-bold text-amber-600">263</p>
+            <p class="text-sm text-gray-500">Currently Active</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="h-[60vh] rounded-2xl shadow-xl overflow-hidden border-2 border-white">
+      <div id="hero-map" class="w-full h-full"></div>
+    </div>
+
+  </div>
+</main>
+    
+    <script>
+      // --- Mobile Menu Toggle ---
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-open');
+      });
+
+      // (Add your Leaflet Map Javascript here if it's part of the page)
+      // --- Initialize Hero Map for Mumbai ---
+const map = L.map('hero-map', {
+  scrollWheelZoom: false 
+}).setView([19.0760, 72.8777], 12); // MODIFIED: Centered on Mumbai
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+// MODIFIED: Added a sample marker in Mumbai
+const sampleComplaint = L.marker([19.0213, 72.8424]).addTo(map);
+sampleComplaint.bindPopup("<b>Recent Report:</b><br>Water Logging near Dadar.");
+    </script>
+    
+  </body>
+</html>
