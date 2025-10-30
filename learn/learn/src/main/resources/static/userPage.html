@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Home - Civic Complaint Portal</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gov-blue': {
+              DEFAULT: '#052e61',
+              dark: '#032145'
+            },
+            'gov-saffron': '#FF9933',
+          }
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Mobile menu animation */
+    #mobile-menu {
+      transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+      transform: translateY(-10px);
+    }
+    #mobile-menu:not(.is-open) {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #mobile-menu.is-open {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md sticky top-0 z-50 relative">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <a href="#" class="text-xl font-bold text-gray-800">Complaint Portal</a>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-center space-x-2">
+              <a href="registerComplaint.html" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">File a Complaint</a>
+              <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Dashboard</a>
+              <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Help</a>
+              <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">About us</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="hidden md:flex items-center">
+          <a href="#" class="bg-gov-blue text-white text-center shadow-md hover:bg-gov-blue-dark hover:shadow-lg px-5 py-2 rounded-md font-medium transform hover:-translate-y-0.5 transition-all duration-200">
+            My Profile
+          </a>
+        </div>
+        
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100">
+            <span class="sr-only">Open main menu</span>
+            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="registerComplaint.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">File a Complaint</a>
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">Dashboard</a>
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">Help</a>
+        <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">About us</a>
+      </div>
+      <div class="pt-4 pb-3 border-t border-gray-200">
+        <div class="px-3">
+          <a href="#" class="block w-full text-center px-4 py-2 rounded-md text-base font-medium text-white bg-gov-blue hover:bg-gov-blue-dark">My Profile</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="flex min-h-screen bg-gray-100">
+    
+    <!-- Sidebar -->
+    <aside class="w-64 flex-shrink-0 bg-gov-blue text-white hidden lg:flex flex-col">
+      <div class="h-20 flex items-center justify-center bg-gov-blue-dark">
+        <svg class="w-10 h-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+        </svg>
+      </div>
+      
+      <nav class="flex-1 px-4 py-6">
+        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-md bg-gov-blue-dark font-semibold">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2-2v-2z"></path>
+          </svg>
+          Dashboard
+        </a>
+        <a href="registerComplaint.html" class="mt-2 flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gov-blue-dark transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          File Complaint
+        </a>
+        <a href="index.html" class="mt-2 flex items-center gap-3 px-4 py-3 rounded-md text-red-300 hover:bg-red-700 hover:text-white transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+          </svg>
+          Logout
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Dashboard -->
+    <main class="flex-1 p-6 lg:p-10">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10">
+        <div>
+          <h1 class="text-3xl font-bold text-gov-blue">Dashboard</h1>
+          <p class="mt-1 text-gray-600">Welcome back, Citizen! Here's an overview of your activity.</p>
+        </div>
+        <a href="registerComplaint.html" class="mt-4 sm:mt-0 w-full sm:w-auto py-3 px-5 bg-gov-blue text-white font-semibold rounded-lg shadow-md hover:bg-gov-blue-dark transition-all duration-200 text-center">
+          File a New Complaint
+        </a>
+      </div>
+
+      <!-- Activity Overview -->
+      <section>
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Activity Overview</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <p class="text-4xl font-bold text-gov-blue">8</p>
+            <p class="mt-1 text-gray-500">Total Complaints Filed</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <p class="text-4xl font-bold text-amber-600">2</p>
+            <p class="mt-1 text-gray-500">Active Complaints</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md">
+            <p class="text-4xl font-bold text-green-600">6</p>
+            <p class="mt-1 text-gray-500">Issues Resolved</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recent Complaints -->
+      <section class="mt-12">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">My Recent Complaints</h2>
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+              <thead class="bg-gray-100 border-b-2 border-gray-200">
+                <tr>
+                  <th class="p-4 font-semibold">Complaint ID</th>
+                  <th class="p-4 font-semibold">Category</th>
+                  <th class="p-4 font-semibold">Date Filed</th>
+                  <th class="p-4 font-semibold">Status</th>
+                  <th class="p-4 font-semibold">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="p-4 font-medium text-gray-700">TMC-84322</td>
+                  <td class="p-4 text-gray-600">Broken Streetlight</td>
+                  <td class="p-4 text-gray-600">Aug 09, 2025</td>
+                  <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">In Progress</span></td>
+                  <td class="p-4"><a href="#" class="font-semibold text-gov-blue hover:underline">View Details</a></td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="p-4 font-medium text-gray-700">TMC-84315</td>
+                  <td class="p-4 text-gray-600">Garbage Overflow</td>
+                  <td class="p-4 text-gray-600">Jul 21, 2025</td>
+                  <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">Resolved</span></td>
+                  <td class="p-4"><a href="#" class="font-semibold text-gov-blue hover:underline">View Details</a></td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="p-4 font-medium text-gray-700">TMC-84301</td>
+                  <td class="p-4 text-gray-600">Pothole</td>
+                  <td class="p-4 text-gray-600">Jul 05, 2025</td>
+                  <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">Resolved</span></td>
+                  <td class="p-4"><a href="#" class="font-semibold text-gov-blue hover:underline">View Details</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- JS for Mobile Menu -->
+  <script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('is-open');
+    });
+  </script>
+</body>
+</html>

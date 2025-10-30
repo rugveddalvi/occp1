@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendor Dashboard - Civic Complaint Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gov-blue': {
+                            'DEFAULT': '#052e61',
+                            'dark': '#032145'
+                        },
+                        'gov-saffron': '#FF9933',
+                    }
+                },
+            },
+        };
+    </script>
+    <style>
+        /* Consistent Status Color Customization */
+        .status-resolved {
+            background-color: #dcfce7; /* green-100 */
+            color: #047857; /* green-700 */
+        }
+        .status-in-progress {
+            background-color: #dbeafe; /* blue-100 */
+            color: #1d4ed8; /* blue-700 */
+        }
+        .status-assigned {
+            background-color: #fffbe6; /* amber-100 */
+            color: #b45309; /* amber-800 */
+        }
+        /* Mobile Menu Animation (Consistent with other pages) */
+        #mobile-menu {
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            transform: translateY(-10px);
+        }
+        #mobile-menu:not(.is-open) {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #mobile-menu.is-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div class="flex min-h-screen">
+        
+        <aside class="w-64 flex-shrink-0 bg-gov-blue text-white hidden lg:flex flex-col">
+            <div class="h-20 flex items-center justify-center bg-gov-blue-dark">
+                <span class="text-xl font-bold">Vendor Portal</span>
+            </div>
+            <nav class="flex-1 px-4 py-6">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-md bg-gov-blue-dark font-semibold">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-4h6v4m0 0h2a2 2 0 002-2V9a2 2 0 00-2-2H7a2 2 0 00-2 2v6a2 2 0 002 2h2m0 0v2"></path></svg>
+                    My Assignments
+                </a>
+                <a href="#" class="mt-2 flex items-center gap-3 px-4 py-3 rounded-md hover:bg-gov-blue-dark transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 3h3m-3-6h3"></path></svg>
+                    Submit Report
+                </a>
+                <a href="index.html" class="mt-2 flex items-center gap-3 px-4 py-3 rounded-md text-red-300 hover:bg-red-700 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    Logout
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-6 lg:p-10">
+            <div class="mb-10">
+                <h1 class="text-3xl font-bold text-gov-blue">My Work Assignments</h1>
+                <p class="mt-1 text-gray-600">Manage your assigned complaints and submit resolution proof.</p>
+            </div>
+
+            <section>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                        <p class="text-4xl font-bold text-blue-600">7</p>
+                        <p class="mt-1 text-gray-500">Currently Working On</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-gov-saffron">
+                        <p class="text-4xl font-bold text-gov-saffron">1</p>
+                        <p class="mt-1 text-gray-500">Awaiting Final Admin Approval</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
+                        <p class="text-4xl font-bold text-green-600">32</p>
+                        <p class="mt-1 text-gray-500">Total Completed Tasks</p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <div class="flex border-b border-gray-200 mb-6">
+                    <button data-target="active-assignments" class="vendor-tab-button flex-1 py-3 text-center font-semibold border-b-2 border-gov-blue text-gov-blue">Active Assignments</button>
+                    <button data-target="resolution-form" class="vendor-tab-button flex-1 py-3 text-center font-semibold border-b-2 border-transparent text-gray-500 hover:text-gov-blue">Submit Resolution</button>
+                </div>
+
+                <div id="active-assignments" class="vendor-tab-content space-y-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Complaints Assigned to Roads & Highways Dept.</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-100 border-b-2 border-gray-200">
+                                <tr>
+                                    <th class="p-4 font-semibold">ID</th>
+                                    <th class="p-4 font-semibold">Category</th>
+                                    <th class="p-4 font-semibold">Location</th>
+                                    <th class="p-4 font-semibold">Assigned Date</th>
+                                    <th class="p-4 font-semibold">Status</th>
+                                    <th class="p-4 font-semibold">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="p-4 font-medium text-gray-700">TMC-84325</td>
+                                    <td class="p-4 text-gray-600">Pothole</td>
+                                    <td class="p-4 text-gray-600">Vasant Vihar</td>
+                                    <td class="p-4 text-gray-600">Aug 15, 2025</td>
+                                    <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full status-in-progress">In Progress</span></td>
+                                    <td class="p-4">
+                                        <button class="px-3 py-1 text-xs bg-gov-saffron text-white rounded-md hover:opacity-90 transition-colors">Update Status</button>
+                                    </td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                    <td class="p-4 font-medium text-gray-700">TMC-84329</td>
+                                    <td class="p-4 text-gray-600">Water Logging</td>
+                                    <td class="p-4 text-gray-600">Thane Station Rd</td>
+                                    <td class="p-4 text-gray-600">Aug 10, 2025</td>
+                                    <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full status-assigned">Assigned</span></td>
+                                    <td class="p-4">
+                                        <button class="px-3 py-1 text-xs bg-gov-saffron text-white rounded-md hover:opacity-90 transition-colors">Accept & Start</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="resolution-form" class="vendor-tab-content space-y-8 hidden">
+                    <h2 class="text-xl font-bold text-gray-800 border-b pb-2">Complete Task & Submit Proof</h2>
+                    <form action="#" method="POST" class="space-y-6">
+                        <div>
+                            <label for="complaint-id-select" class="block text-sm font-medium text-gray-700">Select Complaint ID to Resolve</label>
+                            <select id="complaint-id-select" name="complaint-id-select" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-gov-blue focus:border-gov-blue">
+                                <option>TMC-84325 (Pothole)</option>
+                                <option>TMC-84329 (Water Logging)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="vendor-status" class="block text-sm font-medium text-gray-700">Progress Update (Current Status)</label>
+                            <select id="vendor-status" name="vendor-status" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-gov-blue focus:border-gov-blue">
+                                <option>Work Started</option>
+                                <option>Material Procured</option>
+                                <option>Work 50% Complete</option>
+                                <option>Work Complete - Awaiting Proof Upload</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="description" class="block text-sm font-medium text-gray-700">Description of Work Done (Optional)</label>
+                            <textarea id="description" name="description" rows="3" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-gov-blue focus:border-gov-blue" placeholder="e.g., Pothole filled and road surface resurfaced with cold mix asphalt."></textarea>
+                        </div>
+                        <div>
+                            <label for="file-upload" class="block text-sm font-medium text-gray-700">Upload **"After"** Photo Proof</label>
+                            <div class="mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                <div class="space-y-1 text-center">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-gov-blue hover:text-gov-blue-dark focus-within:outline-none">
+                                            <span>Upload a file</span>
+                                            <input id="file-upload" name="file-upload" type="file" class="sr-only" accept="image/*">
+                                        </label>
+                                        <p class="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">Max file size 5MB (JPG, PNG)</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-5">
+                            <button type="submit" class="w-full py-3 px-8 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200">
+                                Submit Resolution for Admin Verification
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.vendor-tab-button');
+        const contents = document.querySelectorAll('.vendor-tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = document.getElementById(tab.dataset.target);
+
+                tabs.forEach(t => {
+                    t.classList.remove('text-gov-blue', 'border-gov-blue', 'font-semibold');
+                    t.classList.add('text-gray-500', 'border-transparent', 'hover:text-gov-blue');
+                });
+                tab.classList.add('text-gov-blue', 'border-gov-blue', 'font-semibold');
+                tab.classList.remove('text-gray-500', 'border-transparent');
+
+                contents.forEach(c => c.classList.add('hidden'));
+                target.classList.remove('hidden');
+            });
+        });
+
+        // Default to Active Assignments tab
+        document.querySelector('[data-target="active-assignments"]').click();
+    </script>
+</body>
+</html>

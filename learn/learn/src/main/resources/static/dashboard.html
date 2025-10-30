@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'gov-blue': {
+                'DEFAULT': '#052e61',
+                'dark': '#032145'
+              },
+              'gov-saffron': '#FF9933',
+            }
+          },
+        },
+      };
+    </script>
+
+    <style>
+      #mobile-menu {
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        transform: translateY(-10px);
+      }
+      #mobile-menu:not(.is-open) {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #mobile-menu.is-open {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50 relative">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <a href="index.html" class="text-xl font-bold text-gray-800">Complaint Portal</a>
+        </div>
+        <div class="hidden md:block">
+          <div class="ml-10 flex items-center space-x-2">
+            <a href="loginRegister.html" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">File a Complaint</a>
+            <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Dashboard</a>
+            <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Help</a>
+            <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">About us</a>
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:flex items-center">
+        <a href="loginRegister.html" class="bg-gov-blue text-white text-center shadow-md hover:bg-gov-blue-dark hover:shadow-lg px-5 py-2 rounded-md font-medium transform hover:-translate-y-0.5 transition-all duration-200">
+          Login / Register
+        </a>
+      </div>
+      <div class="md:hidden flex items-center">
+        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100">
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-lg">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a href="loginRegister.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">File a Complaint</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">Dashboard</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">Help</a>
+      <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white hover:bg-gov-blue">About us</a>
+    </div>
+    <div class="pt-4 pb-3 border-t border-gray-200">
+      <div class="px-3">
+        <a href="loginRegister.html" class="block w-full text-center px-4 py-2 rounded-md text-base font-medium text-white bg-gov-blue hover:bg-gov-blue-dark">Login / Register</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
+
+  <div class="mb-12 text-center">
+    <h1 class="text-4xl font-bold text-gov-blue">Live Public Dashboard</h1>
+    </div>
+
+  <section>
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Key Metrics</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-gov-blue">
+        <p class="text-4xl font-bold text-gov-blue">1,245</p>
+        <p class="mt-1 text-base text-gray-500">Total Complaints Filed</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
+        <p class="text-4xl font-bold text-green-600">982</p>
+        <p class="mt-1 text-base text-gray-500">Issues Resolved</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
+        <p class="text-4xl font-bold text-amber-600">263</p>
+        <p class="mt-1 text-base text-gray-500">Currently In Progress</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-gray-400">
+        <p class="text-4xl font-bold text-gray-700">7 Days</p>
+        <p class="mt-1 text-base text-gray-500">Avg. Resolution Time</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="mt-12">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Recent Complaints</h2>
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left">
+          <thead class="bg-gray-100 border-b-2 border-gray-200">
+            <tr>
+              <th class="p-4 font-semibold">Complaint ID</th>
+              <th class="p-4 font-semibold">Category</th>
+              <th class="p-4 font-semibold">Location</th>
+              <th class="p-4 font-semibold">Date Filed</th>
+              <th class="p-4 font-semibold">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200 hover:bg-gray-50">
+              <td class="p-4 font-medium text-gray-700">TMC-84321</td>
+              <td class="p-4 text-gray-600">Pothole</td>
+              <td class="p-4 text-gray-600">Kopri, Thane East</td>
+              <td class="p-4 text-gray-600">Aug 10, 2025</td>
+              <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">Resolved</span></td>
+            </tr>
+            <tr class="border-b border-gray-200 hover:bg-gray-50">
+              <td class="p-4 font-medium text-gray-700">TMC-84322</td>
+              <td class="p-4 text-gray-600">Broken Streetlight</td>
+              <td class="p-4 text-gray-600">Vasant Vihar, Thane West</td>
+              <td class="p-4 text-gray-600">Aug 09, 2025</td>
+              <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">In Progress</span></td>
+            </tr>
+            <tr class="border-b border-gray-200 hover:bg-gray-50">
+              <td class="p-4 font-medium text-gray-700">TMC-84323</td>
+              <td class="p-4 text-gray-600">Waste Management</td>
+              <td class="p-4 text-gray-600">Naupada, Thane</td>
+              <td class="p-4 text-gray-600">Aug 09, 2025</td>
+              <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">Pending</span></td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="p-4 font-medium text-gray-700">TMC-84324</td>
+              <td class="p-4 text-gray-600">Water Logging</td>
+              <td class="p-4 text-gray-600">Thane Station Road</td>
+              <td class="p-4 text-gray-600">Aug 08, 2025</td>
+              <td class="p-4"><span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-700">Resolved</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+    
+    <script>
+      // --- Mobile Menu Toggle ---
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('is-open');
+      });
+
+      // (Add your Leaflet Map Javascript here if it's part of the page)
+    </script>
+    
+  </body>
+</html>c

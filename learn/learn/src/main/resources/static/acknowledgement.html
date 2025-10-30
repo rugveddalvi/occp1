@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complaint Registered - Civic Complaint Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'gov-blue': {
+                'DEFAULT': '#052e61',
+                'dark': '#032145'
+              },
+            }
+          },
+        },
+      };
+    </script>
+
+    <style>
+      #mobile-menu {
+        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        transform: translateY(-10px);
+      }
+      #mobile-menu:not(.is-open) {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #mobile-menu.is-open {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50 relative">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0">
+              <a href="index.html" class="text-xl font-bold text-gray-800">Complaint Portal</a>
+            </div>
+            <div class="hidden md:block">
+              <div class="ml-10 flex items-center space-x-2">
+                <a href="registerComplaint.html" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">File a Complaint</a>
+                <a href="userPage.html" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Dashboard</a>
+                <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">Help</a>
+                <a href="#" class="text-gray-600 hover:bg-gray-100 hover:shadow-md rounded-md px-3 py-2 font-medium transition-all duration-200">About us</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hidden md:block">
+            <div class="ml-4 flex items-center md:ml-6">
+              <div class="relative">
+                <button id="user-menu-button" type="button" class="flex max-w-xs items-center rounded-full bg-white p-1 text-sm text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gov-blue focus:ring-offset-2">
+                  <span class="sr-only">Open user menu</span>
+                  <span class="font-medium mr-2">Welcome, User</span>
+                  <svg class="h-8 w-8 rounded-full text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <div id="user-menu" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu">
+                  <a href="userPage.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">My Dashboard</a>
+                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Account Settings</a>
+                  <a href="index.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Logout</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="md:hidden flex items-center">
+            <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-700 hover:bg-gray-100">
+              <span class="sr-only">Open main menu</span>
+              <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div id="mobile-menu" class="md:hidden absolute top-full left-0 w-full bg-white shadow-lg">
+        </div>
+    </nav>
+    <main class="container mx-auto py-12 px-4">
+      <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12 text-center">
+
+        <div class="mx-auto w-24 h-24 flex items-center justify-center bg-green-100 rounded-full">
+          <svg class="w-16 h-16 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+
+        <h1 class="mt-6 text-3xl font-bold text-gray-800">Complaint Registered Successfully!</h1>
+        <p class="mt-2 text-gray-600">Thank you for your contribution to improving our city.</p>
+
+        <div class="mt-8 bg-gray-50 rounded-lg p-4 border border-gray-200">
+          <p class="text-sm text-gray-500">For future reference, your Complaint ID is:</p>
+          <div class="mt-2 flex items-center justify-center gap-4">
+            <p id="complaint-id" class="text-2xl font-bold text-gov-blue tracking-wider">TMC-84325</p>
+            <button id="copy-button" class="px-3 py-1.5 bg-gray-200 text-gray-700 text-xs font-semibold rounded-md hover:bg-gray-300 transition-all">
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-gray-200 text-left">
+          <h2 class="text-lg font-semibold text-gray-800">What Happens Next?</h2>
+          <ul class="mt-2 list-disc list-inside text-gray-600 space-y-1">
+            <li>Your complaint will be verified by our team.</li>
+            <li>It will then be assigned to the relevant department for action.</li>
+            <li>You can track the live status anytime from your personal dashboard.</li>
+          </ul>
+        </div>
+        
+        <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+          <a href="userPage.html" class="w-full sm:w-auto bg-gov-blue text-white text-center shadow-md hover:bg-gov-blue-dark px-8 py-3 rounded-lg font-medium transition-all duration-200">
+            Go to My Dashboard
+          </a>
+          <a href="registerComplaint.html" class="w-full sm:w-auto bg-gray-100 text-gray-700 text-center border border-gray-300 hover:bg-gray-200 px-8 py-3 rounded-lg font-medium transition-all duration-200">
+            File Another Complaint
+          </a>
+        </div>
+      </div>
+    </main>
+    
+    <script>
+      // --- Mobile Menu Toggle ---
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('is-open');
+        });
+      }
+
+      // --- User Profile Dropdown Toggle ---
+      const userMenuButton = document.getElementById('user-menu-button');
+      const userMenu = document.getElementById('user-menu');
+      if (userMenuButton) {
+        userMenuButton.addEventListener('click', () => {
+          userMenu.classList.toggle('hidden');
+        });
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+          if (!userMenuButton.contains(event.target) && !userMenu.contains(event.target)) {
+            userMenu.classList.add('hidden');
+          }
+        });
+      }
+
+      // --- Copy Complaint ID ---
+      const copyButton = document.getElementById('copy-button');
+      const complaintIdElement = document.getElementById('complaint-id');
+      if (copyButton) {
+        copyButton.addEventListener('click', () => {
+          const idToCopy = complaintIdElement.innerText;
+          navigator.clipboard.writeText(idToCopy).then(() => {
+            copyButton.innerText = 'Copied!';
+            setTimeout(() => {
+              copyButton.innerText = 'Copy';
+            }, 2000);
+          });
+        });
+      }
+    </script>
+    
+  </body>
+</html>
